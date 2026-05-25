@@ -8,7 +8,7 @@ Built on [FastMCP](https://github.com/modelcontextprotocol/python-sdk) and the
 I/O, PWM, and basic servo control as MCP tools so an agent can read sensors and drive actuators
 on a connected board.
 
-> ?? **This server lets an AI agent drive physical hardware.** Please read the
+> âš ï¸ **This server lets an AI agent drive physical hardware.** Please read the
 > [Safety](#safety) section before connecting a board.
 
 ---
@@ -27,7 +27,7 @@ on a connected board.
 
 - Python **3.13+** (required by the `firmata-client` dependency)
 - An Arduino (or compatible board) flashed with **StandardFirmata**
-  (`File ? Examples ? Firmata ? StandardFirmata` in the Arduino IDE)
+  (`File â†’ Examples â†’ Firmata â†’ StandardFirmata` in the Arduino IDE)
 - Python dependencies:
   - `mcp[cli]`
   - `firmata-client`
@@ -80,39 +80,39 @@ Add the server to your `claude_desktop_config.json`:
 
 A typical first interaction:
 
-1. `arduino_list_ports` – find your board's serial port
-2. `arduino_connect` – connect using that port
-3. `arduino_get_board_info` – inspect supported modes per pin
-4. `arduino_set_pin_mode` – configure a pin (e.g. pin 13 ? `OUTPUT`)
-5. `arduino_digital_write` – turn it on
+1. `arduino_list_ports` - find your board's serial port
+2. `arduino_connect` - connect using that port
+3. `arduino_get_board_info` - inspect supported modes per pin
+4. `arduino_set_pin_mode` - configure a pin (e.g. pin 13 -> `OUTPUT`)
+5. `arduino_digital_write` - turn it on
 
 ## Tools
 
 | Tool | Description | Read-only |
 |------|-------------|-----------|
-| `arduino_list_ports` | List available serial ports | ? |
+| `arduino_list_ports` | List available serial ports | âœ… |
 | `arduino_connect` | Connect to a board on a given port | |
 | `arduino_disconnect` | Disconnect from the current board | |
-| `arduino_get_board_info` | Firmware info and per-pin capabilities | ? |
+| `arduino_get_board_info` | Firmware info and per-pin capabilities | âœ… |
 | `arduino_set_pin_mode` | Set a pin to INPUT/OUTPUT/ANALOG/PWM/SERVO | |
 | `arduino_digital_write` | Set a digital pin HIGH/LOW | |
-| `arduino_digital_read` | Read a digital pin (majority of 5 samples) | ? |
-| `arduino_analog_write` | Write a PWM value (0–255) | |
-| `arduino_analog_read` | Read an analog channel (averaged) | ? |
+| `arduino_digital_read` | Read a digital pin (majority of 5 samples) | âœ… |
+| `arduino_analog_write` | Write a PWM value (0-255) | |
+| `arduino_analog_read` | Read an analog channel (averaged) | âœ… |
 | `arduino_set_servo_origin` | Register the current angle as a reference | |
 | `arduino_servo_move` | Move a servo to an angle offset from origin | |
 
 ### A note on pin vs. analog channel
 
-`arduino_analog_read` takes an **analog channel** number (`0` = A0, `1` = A1, …),
+`arduino_analog_read` takes an **analog channel** number (`0` = A0, `1` = A1, â€¦),
 but `arduino_set_pin_mode` expects the **digital pin** number. Use the
 `analog_mapping` returned by `arduino_get_board_info` to translate between them.
 
 ### A note on servo movement
 
-`arduino_servo_move` moves the servo to `origin + value` degrees (clamped to 0–180),
+`arduino_servo_move` moves the servo to `origin + value` degrees (clamped to 0-180),
 where `origin` is whatever you registered with `arduino_set_servo_origin`
-(default `0`). The move is **relative to the origin, not cumulative** — calling it
+(default `0`). The move is **relative to the origin, not cumulative** - calling it
 twice with the same `value` results in the same physical position.
 
 ## Safety
@@ -130,12 +130,12 @@ moving parts. Before use:
 
 ## Limitations
 
-- Single board / single client at a time (module-level connection state, no locking —
+- Single board / single client at a time (module-level connection state, no locking -
   intended for local stdio use).
-- Pin numbers are accepted in the range 0–69 (covers boards up to Arduino Mega);
+- Pin numbers are accepted in the range 0-69 (covers boards up to Arduino Mega);
   the actual valid range depends on your board.
 - Reads block briefly (~100 ms) while sampling.
 
 ## License
 
-This project is licensed under the MIT License — see the [LICENSE](LICENSE) file for details.
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
