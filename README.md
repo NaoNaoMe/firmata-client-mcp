@@ -3,7 +3,7 @@
 An [MCP (Model Context Protocol)](https://modelcontextprotocol.io) server that lets an LLM
 control an Arduino's GPIO over the [Firmata](https://github.com/firmata/protocol) protocol.
 
-Built on [FastMCP](https://github.com/modelcontextprotocol/python-sdk) and the
+Built on the [MCP Python SDK](https://github.com/modelcontextprotocol/python-sdk) and the
 [`firmata-client`](https://pypi.org/project/firmata-client/) library. It exposes digital/analog
 I/O, PWM, and basic servo control as MCP tools so an agent can read sensors and drive actuators
 on a connected board.
@@ -29,7 +29,7 @@ on a connected board.
 - An Arduino (or compatible board) flashed with **StandardFirmata**
   (`File → Examples → Firmata → StandardFirmata` in the Arduino IDE)
 - Python dependencies:
-  - `mcp[cli]`
+  - `mcp[cli]` **2.x** (v0.2.0 and later; use `firmata-client-mcp` 0.1.x if you are pinned to `mcp` 1.x)
   - `firmata-client`
   - `pyserial` (installed with `firmata-client`)
   - `pydantic` (installed with `mcp`)
