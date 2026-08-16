@@ -1,8 +1,8 @@
 """
 server.py
 ~~~~~~~~~
-FastMCP server for Arduino GPIO via Firmata.
-Dependency: mcp[cli], pyserial
+MCP server for Arduino GPIO via Firmata.
+Dependency: mcp[cli] >= 2, pyserial
 
 Usage:
     uv run mcp dev server.py       # MCP Inspector for development
@@ -12,11 +12,12 @@ Usage:
 import json
 import time
 import logging
+from importlib.metadata import PackageNotFoundError, version as _pkg_version
 from functools import wraps
 from typing import Optional, Callable, TypeVar
 
 import serial.tools.list_ports
-from mcp.server.fastmcp import FastMCP
+from mcp.server.mcpserver import MCPServer
 from pydantic import BaseModel, Field, ConfigDict
 
 from firmata_client import FirmataClient, PinMode
@@ -115,7 +116,12 @@ def handle_errors(func: T) -> T:
 # MCP server
 # ---------------------------------------------------------------------------
 
-mcp = FastMCP("arduino_mcp")
+try:
+    _VERSION = _pkg_version("firmata-client-mcp")
+except PackageNotFoundError:  # running from a source checkout
+    _VERSION = "0.0.0.dev0"
+
+mcp = MCPServer("arduino_mcp", version=_VERSION)
 
 # ---------------------------------------------------------------------------
 # Input models
