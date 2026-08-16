@@ -183,7 +183,7 @@ wheels = [
 
 [[package]]
 name = "firmata-client-mcp"
-version = "0.1.0"
+version = "0.1.1"
 source = { editable = "." }
 dependencies = [
     { name = "firmata-client" },
@@ -193,7 +193,7 @@ dependencies = [
 [package.metadata]
 requires-dist = [
     { name = "firmata-client", specifier = ">=0.1.0" },
-    { name = "mcp", extras = ["cli"], specifier = ">=1.27.1" },
+    { name = "mcp", extras = ["cli"], specifier = ">=1.27.1,<2" },
 ]
 
 [[package]]

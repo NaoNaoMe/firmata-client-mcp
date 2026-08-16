@@ -4,7 +4,7 @@ build-backend = "hatchling.build"
 
 [project]
 name = "firmata-client-mcp"
-version = "0.1.0"
+version = "0.1.1"
 description = "MCP server for controlling Arduino GPIO over Firmata (StandardFirmata)."
 readme = "README.md"
 license = "MIT"
@@ -32,7 +32,9 @@ classifiers = [
     "Topic :: System :: Hardware :: Hardware Drivers",
 ]
 dependencies = [
-    "mcp[cli]>=1.27.1",
+    # Upper bound: mcp 2.0 renamed FastMCP -> MCPServer and moved it to
+    # mcp.server.mcpserver. Lifted once this server migrates to the v2 API.
+    "mcp[cli]>=1.27.1,<2",
     "firmata-client>=0.1.0",
 ]
 
